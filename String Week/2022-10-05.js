@@ -7,13 +7,19 @@ trimmed = puns.split(",").filter(x => x.split("")[0] !== " " && x.split("")[x.sp
 filtered = trimmed.filter(x => !x.match(/dog/ig)).filter(x => !x.match(/bark/ig)).filter(x => !x.match(/bone/ig))
 
 // Total length of pun cannot be a multiple of 5 (this includes spaces and punctuation)
-mult5 = filtered(x => x.split("").length%5)
+mult5 = filtered.filter(x => x.split("").length%5)
 
 // The sum of the charCodes of the 1st and last characters must be odd (my friend's a bit of a character, but she's great once you get to know her)
 odd = mult5.filter(x => (x.charCodeAt(0) + x.charCodeAt(x.length - 1))%2)
 
 // Character directly after the middle of the string may not be 'e' (For example the character to check in even-length string center is t, for odd an example would be weird -> 'r')
-mid = odd.filter(x => x.slice(x.length/2)[0] !== "e")
+mid = odd.filter(x => {
+    if (!x.length%2) {
+        return x.slice(x.length/2)[0] !== "e"
+    } else {
+        return x.slice(x.length/2 + 1)[0] !== "e"
+    }
+})
 
 // Must have an even number of lowercase letters (do not count punctuation or spaces as letters)
 lower = mid.map(x => x.split("")).filter(x => {
@@ -42,4 +48,4 @@ upper = lower.map(x => x.split("")).filter(x => {
 // Must not contain a capital 'S' (definitely too strict. What does S even have to do with cat puns?)
 noS = upper.filter(x => !x.includes("S"))
 
-['Mew Peter', 'Teenage Mewtant Ninja Turtles', 'Rick & Meowty', "Mewster Rogers' Neighborhood"]
+['Teenage Mewtant Ninja Turtles', 'Rick & Meowty', "Mewster Rogers' Neighborhood"]
