@@ -21,25 +21,27 @@
 
 
 function moveUp(element, arr) {
-    a = JSON.stringify(arr)
-    i = a.indexOf(element)
-    a2 = a.split("")
-    if (i <= 11) {
+    const row = arr.findIndex(row => row.includes(element));
+    const col = arr[row].indexOf(element);
+    if (row === 0) {
         return arr;
-    } else {  
-        [a2[i], a2[i-14]] = [a2[i-14], a2[i]]
-        return JSON.parse(a2.join(""))
+    } else {
+        let temp = arr[row][col];
+        arr[row][col] = arr[row-1][col];
+        arr[row-1][col] = temp;
+        return arr;
     }
 }
 
 function moveDown(element, arr) {
-    a = JSON.stringify(arr)
-    i = a.indexOf(element)
-    a2 = a.split("")
-    if (i >= 31) {
+    const row = arr.findIndex(row => row.includes(element));
+    const col = arr[row].indexOf(element);
+    if (row === 0) {
         return arr;
-    } else {  
-        [a2[i], a2[i+14]] = [a2[i+14], a2[i]]
-        return JSON.parse(a2.join(""))
+    } else {
+        let temp = arr[row][col]; // set a variable for the element that you want to move
+        arr[row][col] = arr[row+1][col]; // set old position to the new position
+        arr[row+1][col] = temp; // set new position to temp
+        return arr;
     }
 }
