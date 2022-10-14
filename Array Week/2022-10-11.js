@@ -36,7 +36,7 @@ function moveUp(element, arr) {
 function moveDown(element, arr) {
     const row = arr.findIndex(row => row.includes(element));
     const col = arr[row].indexOf(element);
-    if (row === 0) {
+    if (row === arr.length - 1) {
         return arr;
     } else {
         let temp = arr[row][col]; // set a variable for the element that you want to move
